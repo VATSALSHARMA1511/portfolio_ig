@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Reset ─────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: none;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+html {
+  scrollbar-width: none;
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+html,
+body {
+  background-color: #080808;
+  color: #f5f5f0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Grain overlay ──────────────────────────────────────── */
+/* Also implemented as GrainOverlay.tsx for React control.
+   CSS fallback here ensures grain is visible before hydration. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('/grain.png');
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+}
+
+/* ─── Typography utilities ───────────────────────────────── */
+.font-display {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+.font-body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Small caps utility — Tailwind doesn't expose font-variant */
+.small-caps {
+  font-variant: small-caps;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ─── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Focus visible (accessibility floor) ───────────────── */
+:focus-visible {
+  outline: 1px solid #f5f5f0;
+  outline-offset: 4px;
+}
+
+/* ─── Selection ──────────────────────────────────────────── */
+::selection {
+  background-color: rgba(245, 245, 240, 0.15);
+  color: #f5f5f0;
+}
